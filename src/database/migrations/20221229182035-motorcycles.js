@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('motorcycles', {
+    await queryInterface.createTable('Motorcycles', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -32,22 +32,14 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
-      topSpeed: {
+      top_speed: {
         type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
         allowNull: false,
       },
     });
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('motorcycles');
+    await queryInterface.dropTable('Motorcycles');
   },
 };
