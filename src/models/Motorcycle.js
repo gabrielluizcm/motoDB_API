@@ -10,6 +10,7 @@ export default class Motorcycle extends Model {
       cylinders: Sequelize.STRING,
       weight: Sequelize.FLOAT,
       top_speed: Sequelize.FLOAT,
+      creator_id: Sequelize.INTEGER,
     }, { sequelize });
     return this;
   }
