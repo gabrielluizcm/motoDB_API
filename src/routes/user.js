@@ -5,10 +5,12 @@ import requireAuth from '../middlewares/requireAuth';
 
 const router = new Router();
 
+// for testing purposes only, will be removed on release
 router.get('/', requireAuth, UserController.index);
-router.get('/:id', UserController.show);
+router.get('/:id', requireAuth, UserController.show);
+
 router.post('/', UserController.create);
-router.put('/:id', UserController.update);
-router.delete('/:id', UserController.delete);
+router.put('/', requireAuth, UserController.update);
+router.delete('/', requireAuth, UserController.delete);
 
 export default router;
