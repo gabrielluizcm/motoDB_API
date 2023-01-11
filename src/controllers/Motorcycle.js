@@ -9,7 +9,7 @@ class MotorcycleController {
         order: [['id', 'desc'], [Photo, 'id', 'desc']],
         include: {
           model: Photo,
-          attributes: ['file_name'],
+          attributes: ['file_name', 'url'],
         },
       });
       return res.json(motorcycles);
@@ -39,7 +39,7 @@ class MotorcycleController {
         order: [['id', 'desc'], [Photo, 'id', 'desc']],
         include: {
           model: Photo,
-          attributes: ['file_name'],
+          attributes: ['file_name', 'url'],
         },
       });
       if (!motorcycle) { return res.status(404).json({ errors: ['Motorcycle not found'] }); }

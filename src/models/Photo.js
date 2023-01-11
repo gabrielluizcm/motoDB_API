@@ -30,6 +30,12 @@ export default class Photo extends Model {
           },
         },
       },
+      url: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return `${process.env.APP_URL}/images/${this.getDataValue('file_name')}`;
+        },
+      },
     }, { sequelize });
     return this;
   }
