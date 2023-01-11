@@ -3,33 +3,37 @@ import User from '../models/User';
 
 class TokenController {
   async create(req, res) {
-    const { email = '', password = '' } = req.body;
+    try {
+      const { email = '', password = '' } = req.body;
 
-    if (!email || !password) {
-      return res.status(401).json({
-        errors: ['Invalid credentials'],
+      if (!email || !password) {
+        return res.status(401).json({
+          errors: ['Invalid credentials'],
+        });
+      }
+
+      const user = await User.findOne({ where: { email } });
+      if (!user) {
+        return res.status(401).json({
+          errors: ['User not found'],
+        });
+      }
+
+      if (!await user.comparePassword(password)) {
+        return res.status(401).json({
+          errors: ['User not found'],
+        });
+      }
+
+      const { id } = user;
+      const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
+        expiresIn: process.env.TOKEN_EXPIRATION,
       });
+
+      return res.json({ token });
+    } catch (e) {
+      return res.status(500).json({ errors: e.errors.map((err) => err.message) });
     }
-
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-      return res.status(401).json({
-        errors: ['User not found'],
-      });
-    }
-
-    if (!await user.comparePassword(password)) {
-      return res.status(401).json({
-        errors: ['User not found'],
-      });
-    }
-
-    const { id } = user;
-    const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
-      expiresIn: process.env.TOKEN_EXPIRATION,
-    });
-
-    return res.json({ token });
   }
 }
 

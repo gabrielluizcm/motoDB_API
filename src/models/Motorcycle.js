@@ -68,11 +68,15 @@ export default class Motorcycle extends Model {
         defaultValue: '',
         validate: {
           isInt: {
-            msg: '"Displacement" must be an integer',
+            msg: '"Creator ID" must be an integer',
           },
         },
       },
     }, { sequelize });
     return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.User, { foreignKey: 'creator_id' });
   }
 }
