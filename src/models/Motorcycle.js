@@ -78,5 +78,6 @@ export default class Motorcycle extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'creator_id' });
+    this.hasMany(models.Photo, { foreignKey: 'motorcycle_id' });
   }
 }
