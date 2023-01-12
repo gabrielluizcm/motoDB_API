@@ -5,6 +5,10 @@ import Motorcycle from '../models/Motorcycle';
 import Photo from '../models/Photo';
 
 const upload = multer(multerConfig).single('file');
+const fs = require('fs');
+const { promisify } = require('util');
+
+const unlinkAsync = promisify(fs.unlink);
 
 class PhotoController {
   create(req, res) {
@@ -16,7 +20,10 @@ class PhotoController {
 
       try {
         const motorcycle = await Motorcycle.findByPk(motorcycleId);
-        if (!motorcycle) { return res.status(400).json({ errors: ['Motorcycle not found'] }); }
+        if (!motorcycle) {
+          await unlinkAsync(req.file.path);
+          return res.status(400).json({ errors: ['Motorcycle not found'] });
+        }
 
         const photo = await Photo.create({
           original_name: originalname,
