@@ -3,17 +3,17 @@ import { resolve } from 'path';
 
 dotenv.config();
 
-import './src/database';
+import './database';
 
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
-import homeRoutes from './src/routes/home';
-import userRoutes from './src/routes/user';
-import tokenRoutes from './src/routes/token';
-import motorcycleRoutes from './src/routes/motorcycle';
-import photoRoutes from './src/routes/photo';
+import homeRoutes from './routes/home';
+import userRoutes from './routes/user';
+import tokenRoutes from './routes/token';
+import motorcycleRoutes from './routes/motorcycle';
+import photoRoutes from './routes/photo';
 
 class App {
   constructor() {
