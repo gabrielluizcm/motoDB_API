@@ -22,9 +22,9 @@ class UserController {
 
   async show(req, res) {
     try {
-      if (!req.params.id) { return res.status(400).json({ errors: ['ID is missing'] }); }
+      const user = await User.findByPk(req.userId);
+      if (!user) { return res.status(400).json({ errors: ['User not found'] }); }
 
-      const user = await User.findByPk(req.params.id);
       const { id, name, email } = user;
       return res.json({ id, name, email });
     } catch (e) {

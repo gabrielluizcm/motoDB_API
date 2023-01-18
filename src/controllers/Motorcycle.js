@@ -5,7 +5,7 @@ class MotorcycleController {
   async index(req, res) {
     try {
       const motorcycles = await Motorcycle.findAll({
-        attributes: ['brand', 'model', 'year', 'displacement', 'cylinders', 'weight', 'top_speed'],
+        attributes: ['id', 'brand', 'model', 'year', 'displacement', 'cylinders', 'weight', 'top_speed'],
         order: [['id', 'desc'], [Photo, 'id', 'desc']],
         include: {
           model: Photo,
