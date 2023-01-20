@@ -19,7 +19,7 @@ export default class Motorcycle extends Model {
         validate: {
           len: {
             args: [3, 255],
-            msg: '"Brand" name must have at least 3 characters',
+            msg: '"Model" name must have at least 3 characters',
           },
         },
       },
@@ -50,7 +50,7 @@ export default class Motorcycle extends Model {
         defaultValue: '',
         validate: {
           isFloat: {
-            msg: '"Cylinders" must be an float',
+            msg: '"Weight" must be a float',
           },
         },
       },
@@ -59,7 +59,7 @@ export default class Motorcycle extends Model {
         defaultValue: '',
         validate: {
           isFloat: {
-            msg: '"Top speed" must be an float',
+            msg: '"Top speed" must be a float',
           },
         },
       },
